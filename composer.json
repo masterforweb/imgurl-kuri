@@ -1,0 +1,24 @@
+{
+  "name": "masterforweb/imgurl-kuri",
+  "description": "module imgurl server",
+  "type": "library",
+  "homepage": "https://github.com/masterforweb/imgurl-kuri",
+  "license": "MIT",
+  "keywords": [
+    "images",
+    "php"
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "masterforweb/thumbcache":"dev-master"
+  },
+  "repositories":[
+    {
+      "type":"git",
+      "url":"https://github.com/masterforweb/thumbcache"
+    }
+  ],
+  "autoload": {
+    "files": ["imgurl.php"]
+  }
+}
