@@ -39,6 +39,7 @@ function imgurl_kuri($source, $mode = null, $file = null, $return = true){
         return ['error' => 'not found source file'];
     }
 
+
     unset($config['path']);
 
     /**
@@ -56,10 +57,6 @@ function imgurl_kuri($source, $mode = null, $file = null, $return = true){
     }
 
 
-    /**
-    * thumbnail generator current mode
-    */
-
 
     if (!isset($config[$mode])){
 
@@ -68,29 +65,14 @@ function imgurl_kuri($source, $mode = null, $file = null, $return = true){
 
     $conf = $config[$mode];
     $result_file = SITEPATH.$source.'/'.$mode.'/'.$img;
+    $result = thumbcache_manager($foriginal, $conf, null, true);
 
-
-    $result = thumbcache($foriginal, $conf['width'], $conf['height'], $result_file, $conf['type']);
-
-    if (!$return) {
-        return;
-    }
-
-    if (file_exists($result_file)) {
-
-        $type = mime_content_type($result_file);
-
-        header("Content-Type: $type");
-        header('Content-Length: ' . filesize($result_file));
-        echo readfile($result_file);
-        return;
-
-    }
-    else {
-        header("HTTP/1.0 404 Not Found");
-    }
+    $type = mime_content_type($result_file);
+    header("Content-Type: $type");
+    echo $result;
 
     return;
+
 
 
 }
