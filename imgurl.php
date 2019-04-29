@@ -64,10 +64,17 @@ function imgurl_kuri($source, $mode = null, $file = null, $return = true){
     }
 
     $conf = $config[$mode];
-    $result_file = SITEPATH.$source.'/'.$mode.'/'.$img;
-    $result = thumbcache_manager($foriginal, $conf, null, true);
 
+    if (defined('IMGFOLDER')) {
+        $result_file = IMGFOLDER . $source . '/' . $mode . '/' . $img;
+    }
+    else {
+        $result_file = null;
+    }
+
+    $result = thumbcache_manager($foriginal, $conf, $result_file, true);
     $type = mime_content_type($result_file);
+
     header("Content-Type: $type");
     echo $result;
 
